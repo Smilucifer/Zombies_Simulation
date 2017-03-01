@@ -1,0 +1,55 @@
+Project Zombies
+
+Public class main(args){
+	Vector humans, infected, zombies to store all.
+	Draw different thing by different color
+	humans saving all.
+	the 1st people reach umbrella becomes first inflected. Delete him from humans and add him into infected.
+	any change between species would be possessed as the above line.
+}
+
+Public class human implements thread(){
+	status health
+	def is_alive(){
+	
+	}
+	def is_infected(){
+		return whether infected
+	}
+	move logical function\
+	prefer to avoid zombies\
+\}\
+\
+Public class infected implements thread()\{\
+	move as human\
+	status infected\
+	time, if time reach 0, become zombies\
+\}\
+\
+Public class zombies extends human implements thread()\{\
+	move random if no signature\
+	avoid the safe house setting onions\
+	def attack()\{\
+		while(zombie.find_human)\{\
+			rush to closest human and try to hurt him\
+			move to the door where the human is and change him as infected.\
+			if stay some time, then define it as kill people.\
+		}
+	}
+	def find_human(){
+		if human reach the 3x3 or 5x5 square of human, then considering the zombie find human.\
+	}
+}
+
+Public class city(){
+	set the safe house\
+	available moving route\
+	set a place called umbrella\
+	draw the simplified city map.\
+}
+
+Public class myPanel extends JPanel()\{\
+	setting a project system time for the infected\
+}
+
+And at last we may draw the graph about the speed of zombies spreading and other information.
