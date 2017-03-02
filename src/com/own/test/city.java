@@ -8,7 +8,7 @@ public class city {
 	double safe_x;
 	double safe_y;
 	
-	//Consturctor
+	//Constructor
 	public city(double x,double y){
 		this.width=x;
 		this.length=y;
