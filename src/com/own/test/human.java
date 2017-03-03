@@ -17,10 +17,12 @@ public class human implements Runnable{
 	public human(double x, double y){
 		this.x=x;
 		this.y=y;
-		speed = 10;
+		speed = 3;
 		color = "green";
 		life = 5;
 		direct = 0;
+		Thread t = new Thread(this);
+		t.start();
 	}
 	
 	public void set_envir(double x, double y){
@@ -61,13 +63,15 @@ public class human implements Runnable{
 	
 	public boolean reachZombies(){
 		for(int i = 0;i<zm.size();i++){
-			if(this.x<zm.get(i).getX()+5&&this.x>zm.get(i).getX()-5
-					&&this.y<zm.get(i).getY()+5&&this.y>zm.get(i).getY()-5){
+			if(this.x<zm.get(i).getX()+10&&this.x>zm.get(i).getX()-10
+					&&this.y<zm.get(i).getY()+10&&this.y>zm.get(i).getY()-10){
 				return true;
 			}
 		}
 		return false;
 	}
+	
+	
 	
 	public boolean is_live(){
 		return this.is_alive;
@@ -97,68 +101,73 @@ public class human implements Runnable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		int moveTime=(int)(Math.random()*30+70);
-		
-		switch(direct){
-		case 0:
-			for(int i=0;i<30;i++){
-				try {
-					Thread.sleep(moveTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if(y>0){
-					this.moveUp();
-				}
-			}
+		while(true){
+			int moveTime=(int)(Math.random()*30+70);
 			
-			break;
-		case 1:
-			for(int i=0;i<30;i++){
-				try {
-					Thread.sleep(moveTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			if(this.reachZombies()==false){
+				//Create a new direction
+				direct = (int)(Math.random()*4);
+				this.setDierct(direct);
+				switch(direct){
+				case 0:
+					for(int i=0;i<30;i++){
+						try {
+							Thread.sleep(moveTime);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						if(y>0){
+							this.moveUp();
+						}
+					}
+					
+					break;
+				case 1:
+					for(int i=0;i<30;i++){
+						try {
+							Thread.sleep(moveTime);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						if(y<597){
+							this.moveDown();
+						}
+					}
+					break;
+				case 2:
+					for(int i=0;i<30;i++){
+						try {
+							Thread.sleep(moveTime);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						if(x>0){
+							this.moveLeft();
+						}
+					}
+					break;
+				case 3:
+					for(int i=0;i<30;i++){
+						try {
+							Thread.sleep(moveTime);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						if(x<797){
+							this.moveRight();
+						}
+					}
+					break;
 				}
-				if(y<597){
-					this.moveDown();
-				}
-			}
-			break;
-		case 2:
-			for(int i=0;i<30;i++){
-				try {
-					Thread.sleep(moveTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if(x>0){
-					this.moveLeft();
-				}
-			}
-			break;
-		case 3:
-			for(int i=0;i<30;i++){
-				try {
-					Thread.sleep(moveTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if(x<797){
-					this.moveRight();
-				}
-			}
-			break;
+			}else{
+				
+			}			
+		}
 		}
 		
-		//Create a new direction
-		direct = (int)(Math.random()*4);
-		this.setDierct(direct);
-		
-	}
 	
 }

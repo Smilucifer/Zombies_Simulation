@@ -23,4 +23,21 @@ public class city {
 		this.safe_x=x;
 		this.safe_y=y;
 	}
+
+	public double getUm_x() {
+		return um_x;
+	}
+
+	public double getUm_y() {
+		return um_y;
+	}
+
+	public double getSafe_x() {
+		return safe_x;
+	}
+
+	public double getSafe_y() {
+		return safe_y;
+	}
+
 }

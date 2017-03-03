@@ -5,7 +5,7 @@ public class zombie extends human{
 	public zombie(double x, double y) {
 		super(x, y);
 		// TODO Auto-generated constructor stub
-		speed = 10;
+		speed = 2;
 		color = "red";
 	}
 

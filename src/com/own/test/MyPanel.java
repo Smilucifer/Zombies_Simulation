@@ -5,11 +5,23 @@ import javax.swing.*;
 
 
 public class MyPanel extends JPanel implements Runnable{
-	Vector<zombie> hum = new Vector<zombie>();
-	Vector<zombie> infected = new Vector<zombie>();
+	Vector<human> hum = new Vector<human>();
+	Vector<infected> infect = new Vector<infected>();
 	Vector<zombie> zm = new Vector<zombie>();
+	city lansing = null;
+	human a = null;
+	infected b = null;
 	
 	public MyPanel(){
+		lansing=new city(800,600);
+		for(int i=0;i<50;i++){
+			double x = Math.random()*800;
+			double y = Math.random()*600;
+			human a = new human(x,y);
+			hum.add(a);
+		}
+		zombie zomb = new zombie(400,300);
+		zm.add(zomb);
 		
 	}
 	public void paint(Graphics g){
@@ -23,8 +35,8 @@ public class MyPanel extends JPanel implements Runnable{
 			this.drawHum(g, hum.get(i).getX(), hum.get(i).getY());
 		}
 		//Draw infected
-		for(int i=0;i<infected.size();i++){
-			this.drawInf(g, infected.get(i).getX(), infected.get(i).getY());
+		for(int i=0;i<infect.size();i++){
+			this.drawInf(g, infect.get(i).getX(), infect.get(i).getY());
 		}
 		//Draw zombies
 		for(int i=0;i<zm.size();i++){
@@ -53,9 +65,39 @@ public class MyPanel extends JPanel implements Runnable{
 		while(true){
 			try{
 				Thread.sleep(100);
-				repaint();
+				
 			}catch(Exception e){
 				e.printStackTrace();
+			}
+			for(int i=0;i<hum.size();i++){
+				if(hum.get(i).at_umb(lansing.getUm_x(),lansing.um_y)==true){
+					infected inf1 = new infected(hum.get(i).getX(),hum.get(i).getY());
+					infect.addElement(inf1);
+					hum.remove(i);
+				}
+				for(int j=0;j<zm.size();j++){
+					if (hum.get(i).getX()==zm.get(j).getX()&&hum.get(i).getY()==zm.get(j).getY()){
+						infected inf1 = new infected(hum.get(i).getX(),hum.get(i).getY());
+						infect.addElement(inf1);
+						hum.remove(i);
+					}
+				}
+			}
+			for(int i=0;i<infect.size();i++){
+				if (infect.get(i).time==0){
+					zombie zom = new zombie(infect.get(i).getX(),infect.get(i).getY());
+					zm.add(zom);
+					infect.remove(i);
+				}
+				for(int j=0;j<zm.size();j++){
+					if (infect.get(i).getX()==zm.get(j).getX()&&infect.get(i).getY()==zm.get(j).getY()){
+						infect.get(i).setLife(infect.get(i).getLife()-1);
+						if(infect.get(i).getLife()==0){
+							infect.remove(i);
+						}
+					}
+				}
+				
 			}
 			repaint();
 		}	
