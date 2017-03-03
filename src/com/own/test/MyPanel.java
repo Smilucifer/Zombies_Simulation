@@ -57,7 +57,7 @@ public class MyPanel extends JPanel implements Runnable{
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-		}
-		
+			repaint();
+		}	
 	}
 }
